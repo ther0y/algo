@@ -5,6 +5,7 @@ import (
 	"masood.dev/algo/cmd"
 
 	_ "masood.dev/algo/cmd/code-review"
+	_ "masood.dev/algo/cmd/gitlab"
 	_ "masood.dev/algo/cmd/nobitex"
 	_ "masood.dev/algo/cmd/notion"
 )
