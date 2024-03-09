@@ -1,7 +1,8 @@
-package cmd
+package code_review
 
 import (
 	"fmt"
+	"masood.dev/algo/cmd"
 	"os/exec"
 	"strings"
 
@@ -14,7 +15,7 @@ var DiffCmd string
 var AiReview bool
 
 func init() {
-	RootCmd.AddCommand(diffCmd)
+	cmd.RootCmd.AddCommand(diffCmd)
 
 	diffCmd.PersistentFlags().StringVarP(&DiffCmd, "diff-cmd", "c", "git diff", "Diff command")
 	diffCmd.PersistentFlags().StringVarP(&RepoDir, "repo-dir", "d", "", "Repo directory")

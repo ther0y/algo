@@ -2,8 +2,12 @@ package vercelclient
 
 import (
 	"fmt"
-	aw "github.com/deanishe/awgo"
 )
+
+type AlfredItemArg struct {
+	URL          string
+	InspectorUrl string
+}
 
 // GetDeployments retrieves the deployments for the specified app from the Vercel API.
 // It returns a pointer to a GetDeploymentsResponse and an error if any.
@@ -28,39 +32,4 @@ func GetDeployments() (*GetDeploymentsResponse, error) {
 	}
 
 	return &result, nil
-}
-
-type AlfredItemArg struct {
-	URL          string
-	InspectorUrl string
-}
-
-func SendDeploymentsAsAlfredItems(deployments []Deployment) {
-	wf := aw.New()
-
-	alfredItems := make([]*aw.Item, 0, len(deployments))
-
-	statusEmoji := map[string]string{
-		"READY":        "🟢",
-		"ERROR":        "🔴",
-		"BUILDING":     "🔵",
-		"QUEUED":       "🟡",
-		"INITIALIZING": "🟡",
-		"DEPLOYING":    "🟡",
-		"UPLOADING":    "🟡",
-	}
-
-	for _, deployment := range deployments {
-		deploymentStatus := statusEmoji[deployment.ReadyState]
-		alfredItems = append(alfredItems, wf.NewItem(deploymentStatus+" "+deployment.Name).
-			Subtitle(deployment.URL).
-			Arg(deployment.InspectorURL).
-			Var("url", deployment.URL).
-			Var("inspectorUrl", deployment.InspectorURL).
-			Quicklook(deployment.URL).
-			Valid(true))
-	}
-
-	wf.SendFeedback()
-	return
 }

@@ -33,3 +33,23 @@ type WalletByCurrency struct {
 	Balance string `json:"balance"`
 	Blocked string `json:"blocked"`
 }
+
+type MarketStatsResponse struct {
+	Status string                 `json:"status"`
+	Stats  map[string]MarketStats `json:"stats"`
+}
+
+type MarketStats struct {
+	IsClosed  bool   `json:"isClosed"`
+	BestSell  string `json:"bestSell"`
+	BestBuy   string `json:"bestBuy"`
+	VolumeSrc string `json:"volumeSrc"`
+	VolumeDst string `json:"volumeDst"`
+	Latest    string `json:"latest"`
+	Mark      string `json:"mark"`
+	DayLow    string `json:"dayLow"`
+	DayHigh   string `json:"dayHigh"`
+	DayOpen   string `json:"dayOpen"`
+	DayClose  string `json:"dayClose"`
+	DayChange string `json:"dayChange"`
+}

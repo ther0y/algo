@@ -1,15 +1,18 @@
-package cmd
+package code_review
 
 import (
 	"fmt"
+	"masood.dev/algo/cmd"
 
-	aw "github.com/deanishe/awgo"
 	"github.com/spf13/cobra"
 	"masood.dev/algo/agents"
 )
 
+var Query string
+var AsFilter bool
+
 func init() {
-	RootCmd.AddCommand(mrCmd)
+	cmd.RootCmd.AddCommand(mrCmd)
 
 	mrCmd.PersistentFlags().StringVarP(&Query, "query", "q", "", "Query to search")
 	mrCmd.PersistentFlags().BoolVarP(&AsFilter, "as-filter", "f", false, "Return results as filter")
@@ -22,17 +25,9 @@ var mrCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		developerAgent := agents.NewDeveloperAgent()
 		resp := developerAgent.Ask(Query)
-		wf := aw.New()
 
 		if AsFilter {
-			for _, choice := range resp.Choices {
-				wf.NewItem(choice.Message.Content).
-					Subtitle("").
-					Arg(choice.Message.Content).
-					Valid(true)
-			}
-			wf.SendFeedback()
-			return
+			AiChoices(resp.Choices).SendAsAlfredItems()
 		} else {
 			fmt.Println(resp.Choices[0].Message.Content)
 		}

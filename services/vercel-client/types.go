@@ -1,19 +1,25 @@
 package vercelclient
 
+import aw "github.com/deanishe/awgo"
+
 type Result struct {
 	InspectUrl string `json:"InspectUrl"`
 }
 
 type GetDeploymentsResponse struct {
-	Deployments []Deployment `json:"deployments"`
-	Pagination  Pagination   `json:"pagination"`
+	Deployments Deployments `json:"deployments"`
+	Pagination  Pagination  `json:"pagination"`
 }
+
+type Deployments []Deployment
+
 type Creator struct {
 	UID         string `json:"uid"`
 	Email       string `json:"email"`
 	Username    string `json:"username"`
 	GitlabLogin string `json:"gitlabLogin"`
 }
+
 type Meta struct {
 	GitlabCommitAuthorName     string `json:"gitlabCommitAuthorName"`
 	GitlabCommitMessage        string `json:"gitlabCommitMessage"`
@@ -313,4 +319,34 @@ type Pagination struct {
 	Count int   `json:"count"`
 	Next  int64 `json:"next"`
 	Prev  int64 `json:"prev"`
+}
+
+func (d Deployments) SendAsAlfredFilter() {
+	wf := aw.New()
+
+	alfredItems := make([]*aw.Item, 0, len(d))
+
+	statusEmoji := map[string]string{
+		"READY":        "🟢",
+		"ERROR":        "🔴",
+		"BUILDING":     "🔵",
+		"QUEUED":       "🟡",
+		"INITIALIZING": "🟡",
+		"DEPLOYING":    "🟡",
+		"UPLOADING":    "🟡",
+	}
+
+	for _, deployment := range d {
+		deploymentStatus := statusEmoji[deployment.ReadyState]
+		alfredItems = append(alfredItems, wf.NewItem(deploymentStatus+" "+deployment.Name).
+			Subtitle(deployment.URL).
+			Arg(deployment.InspectorURL).
+			Var("url", deployment.URL).
+			Var("inspectorUrl", deployment.InspectorURL).
+			Quicklook(deployment.URL).
+			Valid(true))
+	}
+
+	wf.SendFeedback()
+	return
 }

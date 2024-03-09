@@ -26,7 +26,7 @@ var vercelCmd = &cobra.Command{
 		}
 
 		if AstFilter {
-			vercelclient.SendDeploymentsAsAlfredItems(deps.Deployments)
+			deps.Deployments.SendAsAlfredFilter()
 		} else {
 			for _, dep := range deps.Deployments {
 				println(dep.URL)
