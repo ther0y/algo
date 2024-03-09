@@ -1,13 +1,14 @@
-package cmd
+package notionCmd
 
 import (
 	"fmt"
+	"masood.dev/algo/cmd"
 
 	"github.com/spf13/cobra"
 )
 
 func init() {
-	RootCmd.AddCommand(notionCmd)
+	cmd.RootCmd.AddCommand(notionCmd)
 }
 
 var notionCmd = &cobra.Command{

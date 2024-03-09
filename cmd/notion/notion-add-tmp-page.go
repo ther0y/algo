@@ -1,4 +1,4 @@
-package cmd
+package notionCmd
 
 import (
 	"github.com/spf13/cobra"

@@ -5,6 +5,7 @@ import (
 	"masood.dev/algo/cmd"
 
 	_ "masood.dev/algo/cmd/nobitex"
+	_ "masood.dev/algo/cmd/notion"
 )
 
 func main() {

@@ -20,9 +20,9 @@ var vercelCmd = &cobra.Command{
 	Short: "vercel command",
 	Long:  `vercel command`,
 	Run: func(cmd *cobra.Command, args []string) {
+		// TODO: enhance vercel terminal outputs
 		deps, err := vercelclient.GetDeployments()
 		if err != nil {
-			panic(err)
 		}
 
 		if AstFilter {
