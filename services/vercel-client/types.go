@@ -334,6 +334,7 @@ func (d Deployments) SendAsAlfredFilter() {
 		"INITIALIZING": "🟡",
 		"DEPLOYING":    "🟡",
 		"UPLOADING":    "🟡",
+		"CANCELED":     "⚪️",
 	}
 
 	for _, deployment := range d {
