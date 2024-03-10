@@ -33,7 +33,7 @@ func runGitlabProjectsCmd(cmd *cobra.Command, args []string) {
 	}
 
 	if AsFilter {
-		Projects(projects).SendAsAlfredItems()
+		Projects(projects).SendAsAlfredFilter()
 	}
 
 	for _, project := range projects {

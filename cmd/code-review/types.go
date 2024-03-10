@@ -7,7 +7,7 @@ import (
 
 type AiChoices []openai.ChatCompletionChoice
 
-func (ac AiChoices) SendAsAlfredItems() {
+func (ac AiChoices) SendAsAlfredFilter() {
 	wf := aw.New()
 
 	for _, choice := range ac {

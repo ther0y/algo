@@ -11,7 +11,7 @@ type Projects []*gitlab.Project
 
 type MergeRequests []*gitlab.MergeRequest
 
-func (p Projects) SendAsAlfredItems() {
+func (p Projects) SendAsAlfredFilter() {
 	wf := aw.New()
 
 	for _, project := range p {
@@ -27,7 +27,7 @@ func (p Projects) SendAsAlfredItems() {
 	return
 }
 
-func (m MergeRequests) SendAsAlfredItems() {
+func (m MergeRequests) SendAsAlfredFilter() {
 	wf := aw.New()
 
 	for _, mergeRequest := range m {

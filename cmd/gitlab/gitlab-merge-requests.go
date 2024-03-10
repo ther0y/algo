@@ -39,7 +39,7 @@ func runGitlabMergeRequestsCmd(cmd *cobra.Command, args []string) {
 	}
 
 	if AsFilter {
-		MergeRequests(mergeRequests).SendAsAlfredItems()
+		MergeRequests(mergeRequests).SendAsAlfredFilter()
 		return
 	}
 

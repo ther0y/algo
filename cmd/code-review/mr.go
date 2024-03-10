@@ -27,7 +27,7 @@ var mrCmd = &cobra.Command{
 		resp := developerAgent.Ask(Query)
 
 		if AsFilter {
-			AiChoices(resp.Choices).SendAsAlfredItems()
+			AiChoices(resp.Choices).SendAsAlfredFilter()
 		} else {
 			fmt.Println(resp.Choices[0].Message.Content)
 		}
