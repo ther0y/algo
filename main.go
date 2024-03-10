@@ -8,6 +8,7 @@ import (
 	_ "masood.dev/algo/cmd/gitlab"
 	_ "masood.dev/algo/cmd/nobitex"
 	_ "masood.dev/algo/cmd/notion"
+	_ "masood.dev/algo/cmd/vercel"
 )
 
 func main() {

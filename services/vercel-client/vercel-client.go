@@ -1,4 +1,4 @@
-package vercelclient
+package vercelService
 
 import (
 	"os"
